@@ -50,12 +50,20 @@ if (!(std::cin >> choice)) {
     continue;
 }
 
-    break;
-}
 
+bool valid = IsAllowed(choice);
+
+if (valid) {
     return choice;
 }
+else {
 
+continue;
+}
+
+continue;
+}
+}
 
 void ExecuteChoice(int choice) {
 
@@ -75,19 +83,7 @@ return;
 
     auto it = commandRegistry.find(choice);
 
-if (it == commandRegistry.end()) {
-
-    std::cout << "<ERROR> Invalid option." << std::endl;
-    return;
-}
-
     Command& cmd = it->second;
-
-if (cmd.requiresAdmin&& !g_admin) {
-
-    std::cout << "<ERROR> Admin privelages required." << std::endl;
-    return;
-}
 
     cmd.execute();
 }

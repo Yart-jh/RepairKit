@@ -38,6 +38,8 @@ if (! g_admin) {
 //Choice is set via UserInput function.
     choice = UserInput();
 
+
+
 if (choice != 0) {
 
 //ExecuteChoice executes commands based on user choice.

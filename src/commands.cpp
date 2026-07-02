@@ -6,6 +6,8 @@
 #include "log.h"
 #include "command_rgstry.h"
 #include <string>
+#include <vector>
+#include "input.h"
 
 
 //Core function that runs windows commands.
@@ -28,11 +30,15 @@ std::cout << "Process and other log info may be untracked." << std::endl;
     char commandLine[1024];
     strncpy_s(commandLine, cmd.c_str(), sizeof(commandLine));
 
+//converts cmdline into a dynamic vector to remove character limit to commands.
+    std::string cmdLine = cmd;
+    cmdLine.push_back('\0');
+
 //Starts a new Windows process.
     BOOL success = CreateProcessA(
 
     NULL,
-    commandLine,
+    cmdLine.data(),
     NULL,
     NULL,
     FALSE,

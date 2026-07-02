@@ -1,6 +1,7 @@
 #include "security.h"
 #include <iostream>
 #include <windows.h>
+#include "command_rgstry.h"
 
     bool g_admin = false;
 
@@ -67,4 +68,34 @@ if (!CheckTokenMembership(NULL, adminGroup, &isAdmin)) {
 }
 
     return isAdmin == TRUE;
+}
+
+bool IsAllowed(int choice) {
+
+if (choice == 0) {
+return true;
+}
+
+
+auto it = commandRegistry.find(choice);
+
+
+if (it == commandRegistry.end()) {
+
+std::cout << "<ERROR> Invalid input." << std::endl;
+return false;
+
+}
+
+const Command& command = it->second;
+
+if (command.requiresAdmin && !g_admin) {
+
+std::cout << "<ERROR> You do not have the proper permissions to execute this command." << std::endl;
+return false;
+
+}
+
+std::cout << "Input validated!" << std::endl;
+return true;
 }
