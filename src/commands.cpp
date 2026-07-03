@@ -9,6 +9,32 @@
 #include <vector>
 #include "input.h"
 
+//Converts a std::string into a std::wstring for use in CreateProcessW.
+std::wstring ToWideString(const std::string& str) {
+if (str.empty()) return {};
+
+//Sets the size of the wstring to the same size of the std::string.
+int size_needed = MultiByteToWideChar(CP_UTF8,
+    0,
+    str.c_str(),
+    (int)str.size(),
+    NULL,
+    0);
+if (size_needed == 0) return {};
+
+//Converts the string into this sized wstring.
+std::wstring wstr(size_needed, 0);
+MultiByteToWideChar(CP_UTF8,
+    0,
+    str.c_str(),
+    (int)str.size(),
+    &wstr[0],
+    size_needed);
+
+    return wstr;
+
+}
+
 
 //Core function that runs windows commands.
 int RunCommand(const std::string& cmd, bool wait = true, DWORD creationFlags = 0) {
@@ -21,20 +47,21 @@ std::cout << "<ERROR> Failed to open repairtooll_log.txt" << std::endl;
 std::cout << "Process and other log info may be untracked." << std::endl;
 }
 
-    STARTUPINFOA si{};
+    STARTUPINFOW si{};
     PROCESS_INFORMATION pi{};
 
     si.cb = sizeof(si);
 
-//converts cmdline into a dynamic vector that the windows API can use to remove character limit to commands.
-    std::string cmdLine = cmd;
-    cmdLine.push_back('\0');
+//converts the wstring into a dynamic vector that the windows API can use to remove character limit to commands.
+std::wstring wcmd = ToWideString(cmd);
+std::vector<wchar_t> cmdLine(wcmd.begin(), wcmd.end());
+cmdLine.push_back(L'\0');
 
-//Starts a new Windows process.
-    BOOL success = CreateProcessA(
+//Starts a new Windows process (Unicode).
+    BOOL success = CreateProcessW(
 
     NULL,
-    cmdLine.data(),
+    wcmd.data(),
     NULL,
     NULL,
     FALSE,

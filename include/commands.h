@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <windows.h>
 
 void SFCScan();
 void DISMRestore();
@@ -25,3 +26,4 @@ void New_CMD();
 void BootRepair();
 void WindowsReport();
 void Powerthermal_check();
+std::wstring ToWideString(const std::string& str);
