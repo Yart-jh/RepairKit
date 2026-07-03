@@ -1,8 +1,8 @@
-RepairKit V 1.0.0
+RepairKit V 1.0.2
 
 # DESCRIPTION
 
-RepairKit is an open source utility tool that wraps 20 windows system tools and commands that can help with diagnosing and maintaining windows systems into a interface which allows the user to execute them with a number input.
+RepairKit is an open source utility tool that wraps 20+ windows system tools and commands that can help with diagnosing and maintaining windows systems into a interface which allows the user to execute them with a number input.
 
 Program also includes admin privilege verification and locks users out of commands that usually require administrative privilege.
 
@@ -30,6 +30,9 @@ This program was built as both a learning project and a resume piece for an upco
 - Open CMD
 - Open Task Manager
 - Open Device Manager
+- Boot Repair
+- Windows Report
+- Power & CPU Load Report.
 
 
 # REQUIREMENTS TO BUILD:
