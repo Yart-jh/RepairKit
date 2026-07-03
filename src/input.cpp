@@ -18,9 +18,11 @@ void Initcmds() {
     commandRegistry[5] = {"Renew IP", false, RenewIP};
     commandRegistry[6] = {"Reset Winsock", true, ResetWinsock};
     commandRegistry[7] = {"Reset Network Stack", true, ResetNetworkStack};
-    commandRegistry[8] = {"Device Manager Scan", false, DeviceManagerScan};
-    commandRegistry[9] = {"Memory Diagnostic", true, Mem_Diagnostic};
-    commandRegistry[10] = {"DXDIAG", false, DXDIAG};
+    commandRegistry[8] = {"Boot Repair", true, BootRepair};
+    commandRegistry[9] = {"Windows Report", false, WindowsReport};
+    commandRegistry[10] = {"Power & Thermal Check", false, Powerthermal_check};
+    
+
     commandRegistry[11] = {"Driver Health Status", false, Drive_HealthCheck};
     commandRegistry[12] = {"System Information", false, SystemInfo};
     commandRegistry[13] = {"Event Viewer", false, EventVWR};
@@ -31,8 +33,13 @@ void Initcmds() {
     commandRegistry[18] = {"CMD Window", false, New_CMD};
     commandRegistry[19] = {"Task Manager", false, TaskMNGR};
     commandRegistry[20] = {"Device Manager", false, DeviceMNGR};
- 
+    commandRegistry[21] = {"Device Manager Scan", false, DeviceManagerScan};
+    commandRegistry[22] = {"Memory Diagnostic", true, Mem_Diagnostic};
+    commandRegistry[23] = {"DXDIAG", false, DXDIAG};
+
+
 }
+
 
 int UserInput() {
 
@@ -74,7 +81,9 @@ if (choice == 0) {
     std::cout << "exiting.." << std::endl;
     return;
 }
-else if (choice == 69) {
+
+
+if (choice == 69) {
 
 HelpBanner();
 return;

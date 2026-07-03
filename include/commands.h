@@ -22,3 +22,6 @@ void PingTest();
 void TaskMNGR();
 void DeviceMNGR();
 void New_CMD();
+void BootRepair();
+void WindowsReport();
+void Powerthermal_check();

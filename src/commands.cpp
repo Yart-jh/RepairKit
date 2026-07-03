@@ -26,11 +26,7 @@ std::cout << "Process and other log info may be untracked." << std::endl;
 
     si.cb = sizeof(si);
 
-//Converts std::string to C-style string(makes the string compatible with Windows API.)
-    char commandLine[1024];
-    strncpy_s(commandLine, cmd.c_str(), sizeof(commandLine));
-
-//converts cmdline into a dynamic vector to remove character limit to commands.
+//converts cmdline into a dynamic vector that the windows API can use to remove character limit to commands.
     std::string cmdLine = cmd;
     cmdLine.push_back('\0');
 
@@ -56,10 +52,14 @@ file << "Action: " << "<WIP>" << std::endl;
 file << " " << std::endl;
 file << "Command: " << cmd << std::endl;
 file << " " << std::endl;
+
 //Checks if the process succesfully started.
 if (!success) {
+    DWORD exitCode = 0;
+    GetExitCodeProcess(pi.hProcess, &exitCode);
 
     file << "Status: Failed" << std::endl;
+    file << "Exit Code: " << exitCode << std::endl;
     file << " " << std::endl;
     file << "Time: " << std::put_time(std::localtime(&g_currentTime), "%Y-%m-%d %H:%M:%S") << std::endl;
     file << "====================" << std::endl;
@@ -80,6 +80,7 @@ if (wait) {
     GetTime();
     
     file << "Status: Success" << std::endl;
+    file << "Exit Code: " << exitCode << std::endl;
     file << " " << std::endl;
     file << "Time: " << std::put_time(std::localtime(&g_currentTime), "%Y-%m-%d %H:%M:%S") << std::endl;
     file << "====================" << std::endl;
@@ -382,6 +383,65 @@ void New_CMD() {
 
 if (result == 0) std::cout << "New cmd window Opened!" << std::endl;
 else std::cout << "cmd window encountered an issue." << std::endl;
+
+}
+
+void BootRepair() {
+
+std::cout << "WARNING: This action touches upon critical boot system configuration." << std::endl;
+std::cout << "It is strongly reccomended to learn what this exact action [Boot Repair] does before confirming." << std::endl;
+std::cout << "Its also recommended to backup your BCD and close all other applications." << std::endl;
+std::cout << "Do you still wish to continue with this action?" << std::endl;
+
+bool confirm = cmd_confirm();
+
+if (confirm) {
+
+std::cout << "Executing Boot Repair.." << std::endl;
+
+int result = RunCommand("bootrec /fixmbr", true);
+int result2 = RunCommand("bootrec /fixboot", true);
+int result3 = RunCommand("bootrec /scanos", true);
+int result4 = RunCommand("bootrec /rebuildbcd", true);
+
+if (result == 0 && result2 == 0 && result3 == 0 && result4 == 0) std::cout << "Boot Repair completed!" << std::endl;
+else std::cout << "Boot Repair encountered an issue. Please reboot PC to verify normal boot before reopening program as admin." << std::endl;
+
+
+}
+}
+
+void WindowsReport() {
+
+std::cout << "Generating Windows Report.." << std::endl;
+
+int result = RunCommand("perfmon /report", true);
+
+if (result == 0) std::cout << "Windows Report generated!" << std::endl;
+else std::cout << "Windows Report encountered an issue. Please reopen program as admin." << std::endl;
+
+}
+
+void Powerthermal_check() {
+
+std::cout << "WARNING: This action may take ~60 seconds or longer to complete and may cause light load onto your PC." << std::endl;
+std::cout << "Do you still wish to continue?" << std::endl;
+
+bool confirm = cmd_confirm();
+
+if (confirm) {
+
+std::cout << "Executing Power & Thermal Check.." << std::endl;
+
+int result = RunCommand("cmd.exe /c \"powercfg /energy\"", true);
+int result2 = RunCommand("powershell -Command Get-CimInstance Win32_Processor | Select-Object Name,LoadPercentage\"", true);
+int result3 = RunCommand("powershell -Command Get-CimInstance Win32_TemperatureProbe | Select-Object CurrentReading\"", true);
+
+if (result == 0 && result2 == 0 && result3 == 0) std::cout << "Power & Thermal Check completed!" << std::endl;
+else std::cout << "Power & Thermal Check encountered an issue. Please reopen program as admin." << std::endl;
+
+
+}
 
 }
 //FINISH THESE FUNCTIONS!!!!!!!

@@ -72,9 +72,9 @@ if (!CheckTokenMembership(NULL, adminGroup, &isAdmin)) {
 
 bool IsAllowed(int choice) {
 
-if (choice == 0) {
-return true;
-}
+if (choice == 0) return true;
+
+if (choice == 69) return true;
 
 
 auto it = commandRegistry.find(choice);
