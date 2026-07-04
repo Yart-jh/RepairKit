@@ -1,8 +1,8 @@
-RepairKit V 1.0.2
+RepairKit V 1.0.4
 
 # DESCRIPTION
 
-RepairKit is an open source utility tool that wraps 20+ windows system tools and commands that can help with diagnosing and maintaining windows systems into a interface which allows the user to execute them with a number input.
+RepairKit is an open source utility tool that wraps 20+ windows system tools and commands that can help with diagnosing and maintaining windows systems into a interface which allows the user to execute them with a string input.
 
 Program also includes admin privilege verification and locks users out of commands that usually require administrative privilege.
 
@@ -42,7 +42,7 @@ MinGW-w64 (or another compatible GCC)
 
 # BUILD INSTRUCTION:
 
-run "repairtoolbuilder.bat" to compile source code into a usable .exe . After the build is complete; run "RepairKit.exe" 
+run "repairkit_releasebuilder.bat" to compile source code into a usable .exe . After the build is complete; run "RepairKit.exe" 
 
 # PREBUILT RELEASE
 
