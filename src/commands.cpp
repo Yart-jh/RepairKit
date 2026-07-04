@@ -9,7 +9,7 @@
 #include <vector>
 #include "input.h"
 
-//Converts a std::string into a std::wstring for use in CreateProcessW.
+//Converts std::string into a std::wstring for use in CreateProcessW.
 std::wstring ToWideString(const std::string& str) {
 if (str.empty()) return {};
 

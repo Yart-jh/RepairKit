@@ -1,5 +1,6 @@
 #pragma once
+#include <string>
 
-int UserInput();
+std::string UserInput();
 void Initcmds();
-void ExecuteChoice(int choice);
+void ExecuteChoice(std::string choice);

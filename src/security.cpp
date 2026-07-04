@@ -2,6 +2,8 @@
 #include <iostream>
 #include <windows.h>
 #include "command_rgstry.h"
+#include <string>
+#include "command_rgstry.h"
 
     bool g_admin = false;
 
@@ -70,32 +72,31 @@ if (!CheckTokenMembership(NULL, adminGroup, &isAdmin)) {
     return isAdmin == TRUE;
 }
 
-bool IsAllowed(int choice) {
+bool IsAllowed(std::string choice) {
 
-if (choice == 0) return true;
+for (char& c : choice) {
 
-if (choice == 69) return true;
+    c = std::tolower(c);
+}//End for.
+
+if (choice == "exit") return true;
+
+if (choice == "info") return true;
 
 
-auto it = commandRegistry.find(choice);
-
-
-if (it == commandRegistry.end()) {
-
-std::cout << "<ERROR> Invalid input." << std::endl;
-return false;
-
-}
-
-const Command& command = it->second;
-
+for (const auto& [cmdID, command] : commandRegistry) {
+if (command.cmdID == choice) {
 if (command.requiresAdmin && !g_admin) {
 
-std::cout << "<ERROR> You do not have the proper permissions to execute this command." << std::endl;
+std::cout << "<ERROR> This command require administrative privilages." << std::endl;
+std::cout << "Reopen program as administrator." << std::endl;
 return false;
+}
+std::cout << "Input Validated!" << std::endl;
+return true;
 
 }
-
-std::cout << "Input validated!" << std::endl;
-return true;
+}
+std::cout << "<ERROR> Invalid Input." << std::endl;
+return false;
 }

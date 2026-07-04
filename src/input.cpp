@@ -5,57 +5,51 @@
 #include "command_rgstry.h"
 #include <map>
 #include "display.h"
+#include <string>
 
     extern std::map<int, Command> commandRegistry;
 
 //Function that sets options to different positions on the command registry.
 void Initcmds() {
 
-    commandRegistry[1] = {"SFC Scan", true, SFCScan};
-    commandRegistry[2] = {"DISM Restore", true, DISMRestore};
-    commandRegistry[3] = {"CHKDSK", true, CHKDSK};
-    commandRegistry[4] = {"Flush DNS", false, FlushDNS};
-    commandRegistry[5] = {"Renew IP", false, RenewIP};
-    commandRegistry[6] = {"Reset Winsock", true, ResetWinsock};
-    commandRegistry[7] = {"Reset Network Stack", true, ResetNetworkStack};
-    commandRegistry[8] = {"Boot Repair", true, BootRepair};
-    commandRegistry[9] = {"Windows Report", false, WindowsReport};
-    commandRegistry[10] = {"Power & Thermal Check", false, Powerthermal_check};
-    
+    commandRegistry[1] = {"SFC Scan", "sfc", true, SFCScan};
+    commandRegistry[2] = {"DISM Restore", "dism", true, DISMRestore};
+    commandRegistry[3] = {"CHKDSK", "chkdsk", true, CHKDSK};
+    commandRegistry[4] = {"Flush DNS", "flushdns", false, FlushDNS};
+    commandRegistry[5] = {"Renew IP", "renewip", false, RenewIP};
+    commandRegistry[6] = {"Reset Winsock", "resetwinsock", true, ResetWinsock};
+    commandRegistry[7] = {"Reset Network Stack", "resetnetworkstack", true, ResetNetworkStack};
+    commandRegistry[8] = {"Boot Repair", "bootrepair", true, BootRepair};
+    commandRegistry[9] = {"Windows Report", "windowsreport", false, WindowsReport};
+    commandRegistry[10] = {"Power & Thermal Check", "powerthermal_check", false, Powerthermal_check};
 
-    commandRegistry[11] = {"Driver Health Status", false, Drive_HealthCheck};
-    commandRegistry[12] = {"System Information", false, SystemInfo};
-    commandRegistry[13] = {"Event Viewer", false, EventVWR};
-    commandRegistry[14] = {"Driver Query", false, Driver_query};
-    commandRegistry[15] = {"Reliability Monitor", false, Reliability_mon};
-    commandRegistry[16] = {"Network Information", false, Network_info};
-    commandRegistry[17] = {"Ping Test", false, PingTest};
-    commandRegistry[18] = {"CMD Window", false, New_CMD};
-    commandRegistry[19] = {"Task Manager", false, TaskMNGR};
-    commandRegistry[20] = {"Device Manager", false, DeviceMNGR};
-    commandRegistry[21] = {"Device Manager Scan", false, DeviceManagerScan};
-    commandRegistry[22] = {"Memory Diagnostic", true, Mem_Diagnostic};
-    commandRegistry[23] = {"DXDIAG", false, DXDIAG};
+    commandRegistry[11] = {"Driver Health Status", "driver_status", false, Drive_HealthCheck};
+    commandRegistry[12] = {"System Information", "sysinfo", false, SystemInfo};
+    commandRegistry[13] = {"Event Viewer", "eventvwr", false, EventVWR};
+    commandRegistry[14] = {"Driver Query", "driverquery", false, Driver_query};
+    commandRegistry[15] = {"Reliability Monitor", "reliability_mon", false, Reliability_mon};
+    commandRegistry[16] = {"Network Information", "networkinfo", false, Network_info};
+    commandRegistry[17] = {"Ping Test", "pingtest", false, PingTest};
+    commandRegistry[18] = {"CMD Window", "newcmd", false, New_CMD};
+    commandRegistry[19] = {"Task Manager", "taskmngr", false, TaskMNGR};
+    commandRegistry[20] = {"Device Manager", "devicemngr", false, DeviceMNGR};
+    commandRegistry[21] = {"Device Manager Scan", "devicemanagerscan", false, DeviceManagerScan};
+    commandRegistry[22] = {"Memory Diagnostic", "memdiag", true, Mem_Diagnostic};
+    commandRegistry[23] = {"DXDIAG", "dxdiag", false, DXDIAG};
 
 
 }
 
 
-int UserInput() {
+std::string UserInput() {
 
-    int choice;
+    std::string choice;
     
 while (true) {
 
     std::cout << "Please select which option you would like to proceed with[Numbers only]" << std::endl;
 
-if (!(std::cin >> choice)) {
-
-    std::cout << "<ERROR> Invalid Input." << std::endl;
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
-    continue;
-}
+std::cin >> choice;
 
 
 bool valid = IsAllowed(choice);
@@ -72,27 +66,38 @@ continue;
 }
 }
 
-void ExecuteChoice(int choice) {
+void ExecuteChoice(std::string choice) {
 
     extern bool g_admin;
 
-if (choice == 0) {
+for (char& c : choice) {
+
+    c = std::tolower(c);
+}//End for.
+
+if (choice == "exit") {
 
     std::cout << "exiting.." << std::endl;
     return;
 }
 
 
-if (choice == 69) {
+if (choice == "info") {
 
 HelpBanner();
 return;
 }
 
+for (const auto& [cmdID, cmd] : commandRegistry) {
 
-    auto it = commandRegistry.find(choice);
+if (cmd.cmdID == choice) {
 
-    Command& cmd = it->second;
+Command command = cmd;
 
-    cmd.execute();
+cmd.execute();
+return;
+}
+}
+    std::cout << "<ERROR> Invalid Input" << std::endl;
+    return;
 }

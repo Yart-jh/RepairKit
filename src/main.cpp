@@ -17,7 +17,7 @@ int main() {
 //Creates a log file if one hasnt been created.
     Create_Logfile();
     std::ofstream file(OpenLogfile());
-    int choice = 999;
+    std::string choice;
 
 //Initializes command options.
     Initcmds();
@@ -27,7 +27,7 @@ int main() {
 
     WelcomeBanner();
 //Loop that keeps program active as long as user choice is not 0.
-while (choice != 0) {
+while (choice != "exit") {
 
 //Gives a warning if user didnt launch program with admin priveleges.
 if (! g_admin) {
@@ -38,9 +38,12 @@ if (! g_admin) {
 //Choice is set via UserInput function.
     choice = UserInput();
 
+for (char& c : choice) {
 
+    c = std::tolower(c);
+}//End for.
 
-if (choice != 0) {
+if (choice != "exit") {
 
 //ExecuteChoice executes commands based on user choice.
     ExecuteChoice(choice);
@@ -48,7 +51,7 @@ if (choice != 0) {
 }
 else {
 
-//Program closes if user choice is 0.
+//Program closes if user choice is exit.
     file.close();
     return 0;
 }
