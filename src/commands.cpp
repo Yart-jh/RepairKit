@@ -371,15 +371,19 @@ else std::cout << "Network Information encountered an issue." << std::endl;
 
 void PingTest() {
 
-    std::cout << "Starting Ping Test." << std::endl;
-    std::cout << "Program will ping 10 times and then will give netwrok statistics." << std::endl;
+int pingcount = PingTst_n();
+std::string pingTarget = PingTst_target();
 
-    int result = RunCommand("ping google.com -n 10", true);
+    std::string pingCMD = "ping " + pingTarget + " -n " + std::to_string(pingcount);
+    std::cout << "Starting Ping Test." << std::endl;
+    
+    int result = RunCommand(pingCMD, true);
 
 if (result == 0) std::cout << "Ping test completed!" << std::endl;
 else std::cout << "Ping test encountered and issue." << std::endl;
 
 }
+
 void TaskMNGR() {
 
     std::cout << "Opening Task Manager." << std::endl;
