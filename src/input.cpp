@@ -165,3 +165,41 @@ continue;
 
 return pingTarget;
 }
+
+bool sysinfo_export() {
+
+std::string choice;
+
+while (true) {
+
+    std::cout << "Would you like to export systeminfo to a .txt file?[y/n]" << std::endl;
+
+    std::cin >> choice;
+
+if (choice.length() > 1) {
+    std::cout << "<ERROR> Invalid input. Only y/n is accepted." << std::endl;
+    continue;
+}
+
+if (choice == "y" || choice == "Y") {
+
+std::cout << "Systeminfo will be exported to a .txt file." << std::endl;
+return true;
+
+}
+else if (choice == "n" || choice == "N") {
+
+std::cout << "Systeminfo will not be exported." << std::endl;
+return false;
+
+}
+else {
+
+std::cout << "<ERROR> Invalid input. Only y/n is accepted." << std::endl;
+continue;
+
+}
+}
+
+
+}

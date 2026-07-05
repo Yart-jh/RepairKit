@@ -10,3 +10,4 @@ extern std::time_t g_currentTime;
 void Create_Logfile();
 std::ofstream OpenLogfile();
 void GetTime();
+fs::path sysinfo_getpath();

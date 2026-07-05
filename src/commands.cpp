@@ -315,9 +315,23 @@ else std::cout << "Drive Health Check encountered an issue. Please reopen the pr
 
 void SystemInfo() {
 
+bool exp_sysinfo = sysinfo_export();
+std::string sysinfo_cmd;
+
+if (exp_sysinfo) {
+
+fs::path filepath(sysinfo_getpath());
+
+sysinfo_cmd = "powershell -Command \"systeminfo | Out-File -FilePath '" + filepath.string() + "'\"";
+
+}
+else {
+
+sysinfo_cmd = "systeminfo";
+}
     std::cout << "Gathering System Info.." << std::endl;
 
-    int result = RunCommand("systeminfo", true);
+    int result = RunCommand(sysinfo_cmd, true);
 
 if (result == 0) std::cout << "System Information completed!" << std::endl;
 else std::cout << "System Information encountered an issue.." << std::endl; 

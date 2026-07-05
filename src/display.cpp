@@ -48,6 +48,49 @@ void WelcomeBanner() {
 
 }
 
+void WelcomeBan_noadmin() {
+
+    std::cout << "Welcome to RepairTool!" << std::endl;
+    std::cout << "[Some options may be unavailable due to lack of admin privilages]" << std::endl;
+    std::cout << "[Reopen the program as administrator to gain full access to the program]" << std::endl;
+    std::cout << " " << std::endl;
+
+    std::cout << "--REPAIR--" << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << "[flushdns] FLUSH DNS (NETWORK)" << std::endl;
+    std::cout << "[renewip] RENEW IP (NETWORK)" << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << "--DIAGNOSE--" << std::endl;
+    std::cout << " " << std::endl;
+
+    std::cout << "[windowsreport] WINDOWS REPORT" << std::endl;
+    std::cout << "[powerthermal_check] POWER & THERMAL CHECK" << std::endl;
+    std::cout << "[driver_status] SSD/HDD HEALTH" << std::endl;
+    std::cout << "[sysinfo] SYSTEM INFORMATION" << std::endl;
+    std::cout << "[eventvwr] EVENT VIEWER" << std::endl;
+    std::cout << "[driverquery] DRIVER QUERY" << std::endl;
+    std::cout << "[reliability_mon] RELIABILITY MONITOR" << std::endl;
+    std::cout << "[networkinfo] NETWORK INFO (NETWORK)" << std::endl;
+    std::cout << "[pingtest] PING TEST(NETWORK)" << std::endl;
+    std::cout << "[newcmd] OPEN CMD" << std::endl;
+    std::cout << "[taskmngr] OPEN TSK MANAGER" << std::endl;
+    std::cout << "[devicemngr] OPEN DEVICE MANAGER" << std::endl;
+    std::cout << "[devicemanagerscan] DEVICE MANAGER SCAN" << std::endl;
+    std::cout << "[dxdiag] DXDIAG" << std::endl;
+
+    std::cout << " " << std::endl;
+    std::cout << "--OTHER--" << std::endl;
+    std::cout << " " << std::endl;
+
+    std::cout << "[exit] EXIT" << std::endl;
+    std::cout << "[info] INFO" << std::endl;
+
+    std::cout << "======================================" << std::endl;
+
+}
+
+
+
 void HelpBanner() {
 
 std::cout << "====================================================================================" << std::endl;

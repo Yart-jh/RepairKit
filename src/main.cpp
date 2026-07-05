@@ -25,8 +25,13 @@ int main() {
     file << "=======REPAIRTOOL STARTED=======" << std::endl;
     file << " " << std::endl;
 
+if (!g_admin) {
+ WelcomeBan_noadmin();
+}
+else {
     WelcomeBanner();
-//Loop that keeps program active as long as user choice is not 0.
+}
+//Loop that keeps program active as long as user choice is not exit.
 while (choice != "exit") {
 
 //Gives a warning if user didnt launch program with admin priveleges.
