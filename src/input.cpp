@@ -66,7 +66,7 @@ continue;
 }
 }
 
-void ExecuteChoice(std::string choice) {
+std::string ExecuteChoice(std::string& choice) {
 
     extern bool g_admin;
 
@@ -78,14 +78,14 @@ for (char& c : choice) {
 if (choice == "exit") {
 
     std::cout << "exiting.." << std::endl;
-    return;
+    return "";
 }
 
 
 if (choice == "info") {
 
 HelpBanner();
-return;
+return "";
 }
 
 for (const auto& [cmdID, cmd] : commandRegistry) {
@@ -95,11 +95,11 @@ if (cmd.cmdID == choice) {
 Command command = cmd;
 
 cmd.execute();
-return;
+return choice;
 }
 }
     std::cout << "<ERROR> Invalid Input" << std::endl;
-    return;
+    return "";
 }
 
 int PingTst_n() {
@@ -203,3 +203,4 @@ continue;
 
 
 }
+

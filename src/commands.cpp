@@ -37,10 +37,10 @@ MultiByteToWideChar(CP_UTF8,
 
 
 //Core function that runs windows commands.
-int RunCommand(const std::string& cmd, bool wait = true, DWORD creationFlags = 0) {
+int RunCommand(std::string choice, const std::string& cmd, bool wait = true, DWORD creationFlags = 0) {
 
     std::ofstream file(OpenLogfile());
-    
+
 
 if (!file) {
 std::cout << "<ERROR> Failed to open repairtooll_log.txt" << std::endl;
@@ -75,7 +75,7 @@ cmdLine.push_back(L'\0');
 
 file << "====================" << std::endl;
 file << " " << std::endl;
-file << "Action: " << "<WIP>" << std::endl;
+file << "Action: " << choice << std::endl;
 file << " " << std::endl;
 file << "Command: " << cmd << std::endl;
 file << " " << std::endl;
@@ -126,7 +126,7 @@ void SFCScan() {
 
     std::cout << "Executing SFC scan.." << std::endl;
 
-    int result = RunCommand("sfc /scannow", true);
+    int result = RunCommand("SFC Scan","sfc /scannow", true);
 
 if (result == 0) std::cout << "SFC Completed!" << std::endl;
 else std::cout << "SFC Encountered an issue. Please reopen program as administrator.." << std::endl;
@@ -143,7 +143,7 @@ void DISMRestore(){
 if (confirm) {
 std::cout << "Executing DISM Restore.." << std::endl;
 
-    int result = RunCommand("DISM /Online /Cleanup-Image /RestoreHealth", true);
+    int result = RunCommand("DISM Restore","DISM /Online /Cleanup-Image /RestoreHealth", true);
 
 if (result == 0) std::cout << "DISM Restore Completed!" << std::endl;
 else std::cout << "DISM Restore Encountered an issue. Please reopen program as administrator.." << std::endl;
@@ -167,7 +167,7 @@ if (confirm) {
 
     std::cout << "Executing CHKDSK.." << std::endl;
 
-    int result = RunCommand("chkdsk C: /f /r", true);
+    int result = RunCommand("CHKDSK","chkdsk C: /f /r", true);
 
 if (result == 0) std::cout << "CHKDSK completed! Please restart your PC if prompted to finish." << std::endl;
 else std::cout << "CHKDSK Encountered an issue. Reopen program as administrator." << std::endl;
@@ -185,7 +185,7 @@ void FlushDNS() {
 
     std::cout << "Clearing the DNS resolver cache.." << std::endl;
 
-    int result = RunCommand("ipconfig /flushdns", true);
+    int result = RunCommand("DNS Flush","ipconfig /flushdns", true);
 
 if (result == 0) std::cout << "DNS flush completed!" << std::endl;
 else std::cout << "DNS flush encountered an issue." << std::endl;
@@ -197,7 +197,7 @@ void RenewIP() {
 
     std::cout << "Renewing IP.." << std::endl;
 
-    int result = RunCommand("ipconfig /renew", true);
+    int result = RunCommand("IP Renew","ipconfig /renew", true);
 
 if (result == 0) std::cout << "IP renewal completed!" << std::endl;
 else std::cout << "IP renewal encountered an issue.." << std::endl;
@@ -214,7 +214,7 @@ void ResetWinsock() {
 if (confirm) {
 std::cout << "Resetting Winsock.." << std::endl;
 
-    int result = RunCommand("netsh winsock reset", true);
+    int result = RunCommand("Winsock Reset","netsh winsock reset", true);
 
 if (result == 0) std::cout << "Winsock reset completed!" << std::endl;
 else std::cout << "Winsock reset encountered an issue." << std::endl;
@@ -239,7 +239,7 @@ if (confirm) {
 
     std::cout << "Executing Network Stack Reset.." << std::endl;
 
-    int result = RunCommand("netsh int ip reset", true);
+    int result = RunCommand("Network Stack Reset","netsh int ip reset", true);
 
 if (result == 0) std::cout << "Network Stack Reset completed! Please restart your PC if prompted to finish." << std::endl;
 else std::cout << "Network Stack Reset Encountered an issue. Reopen program as administrator." << std::endl;
@@ -257,7 +257,7 @@ void DeviceManagerScan() {
 
     std::cout << "Running Device Manager Scan.." << std::endl;
 
-    int result = RunCommand("pnputil /enum-devices /problem", true);
+    int result = RunCommand("Device Manager Scan","pnputil /enum-devices /problem", true);
 
 if (result == 0) std::cout << "Device Manager scan completed!" << std::endl;
 else std::cout << "Device Manager Scan encountered an issue. Please reopen program as administrator." << std::endl;
@@ -276,7 +276,7 @@ if (confirm) {
 
     std::cout << "Executing Memory Diagnostic.." << std::endl;
 
-    int result = RunCommand("mdsched.exe", true);
+    int result = RunCommand("Memory Diagnostic","mdsched.exe", true);
 
 if (result == 0) std::cout << "Memory Diagnostic Scheduled! Please restart your PC if prompted to finish." << std::endl;
 else std::cout << "Memory Diagnostic Encountered an issue. Reopen program as administrator." << std::endl;
@@ -294,7 +294,7 @@ void DXDIAG() {
 
     std::cout << "Executing DXDIAG.." << std::endl;
 
-    int result = RunCommand("dxdiag", true);
+    int result = RunCommand("DXDIAG","dxdiag", true);
 
 if (result == 0) std::cout << "DXDIAG completed!" << std::endl;
 else std::cout << "DXDIAG encountered an issue." << std::endl;
@@ -306,7 +306,7 @@ void Drive_HealthCheck() {
 
     std::cout << "Collecting Drive Health Information.." << std::endl;
 
-    int result = RunCommand("powershell -Command \"Get-PhysicalDisk | Format-Table FriendlyName, MediaType, HealthStatus, OperationalStatus\"", true);
+    int result = RunCommand("Drive Health Check","powershell -Command \"Get-PhysicalDisk | Format-Table FriendlyName, MediaType, HealthStatus, OperationalStatus\"", true);
 
 if (result == 0) std::cout << "Drive Health Check Completed!" << std::endl;
 else std::cout << "Drive Health Check encountered an issue. Please reopen the program as administrator" << std::endl;
@@ -331,7 +331,7 @@ sysinfo_cmd = "systeminfo";
 }
     std::cout << "Gathering System Info.." << std::endl;
 
-    int result = RunCommand(sysinfo_cmd, true);
+    int result = RunCommand("System Information",sysinfo_cmd, true);
 
 if (result == 0) std::cout << "System Information completed!" << std::endl;
 else std::cout << "System Information encountered an issue.." << std::endl; 
@@ -342,7 +342,7 @@ void EventVWR() {
 
     std::cout << "Running Event Viewer.." << std::endl;
 
-    int result = RunCommand("mmc.exe eventvwr.msc", false);
+    int result = RunCommand("Event Viewer","mmc.exe eventvwr.msc", false);
 
 if (result == 0) std::cout << "Event Viewer Completed." << std::endl;
 else std::cout << "Event Viewer encountered an error. Reopen the program as administrator." << std::endl;
@@ -353,7 +353,7 @@ void Driver_query() {
 
     std::cout << "Collecting driver information.." << std::endl;
 
-    int result = RunCommand("driverquery /v", true);
+    int result = RunCommand("Driver Query","driverquery /v", true);
 
 if (result == 0) std::cout << "Driver query completed!" << std::endl;
 else std::cout << "Driver query encountered an issue." << std::endl;
@@ -365,7 +365,7 @@ void Reliability_mon() {
 
     std::cout << "Running Reliability Monitor.." << std::endl;
 
-    int result = RunCommand("perfmon /rel", true);
+    int result = RunCommand("Reliability Monitor","perfmon /rel", true);
 
 if (result == 0) std::cout << "Reliability Monitor completed" << std::endl;
 else std::cout << "Reliability Monitor encountered an issue." << std::endl;
@@ -376,7 +376,7 @@ void Network_info() {
 
     std::cout << "running Network Information.." << std::endl;
 
-    int result = RunCommand("ipconfig /all", true);
+    int result = RunCommand("Network Information","ipconfig /all", true);
 
 if (result == 0) std::cout << "Network Information completed!" << std::endl;
 else std::cout << "Network Information encountered an issue." << std::endl;
@@ -391,7 +391,7 @@ std::string pingTarget = PingTst_target();
     std::string pingCMD = "ping " + pingTarget + " -n " + std::to_string(pingcount);
     std::cout << "Starting Ping Test." << std::endl;
     
-    int result = RunCommand(pingCMD, true);
+    int result = RunCommand("Ping Test",pingCMD, true);
 
 if (result == 0) std::cout << "Ping test completed!" << std::endl;
 else std::cout << "Ping test encountered and issue." << std::endl;
@@ -402,9 +402,9 @@ void TaskMNGR() {
 
     std::cout << "Opening Task Manager." << std::endl;
 
-    int result = RunCommand("taskmgr.exe", false);
+    int result = RunCommand("Task Manager","taskmgr.exe", false);
 
-if (result == 0) std::cout << "Task Manager Opened!" << std::endl;
+if (result == 0 || result == 259) std::cout << "Task Manager Opened!" << std::endl;
 else std::cout << "Task Manager encountered an issue." << std::endl;
 
 }
@@ -413,9 +413,9 @@ void DeviceMNGR() {
 
     std::cout << "Opening Device Manager." << std::endl;
 
-    int result = RunCommand("mmc.exe devmgmt.msc", false);
+    int result = RunCommand("Device Manager","mmc.exe devmgmt.msc", false);
 
-if (result == 0) std::cout << "Device Manager Opened!" << std::endl;
+if (result == 0 || result == 259) std::cout << "Device Manager Opened!" << std::endl;
 else std::cout << "Device Manager encountered an issue." << std::endl;
 
 }
@@ -424,9 +424,9 @@ void New_CMD() {
 
     std::cout << "Opening a new CMD window." << std::endl;
 
-    int result = RunCommand("cmd.exe", false, CREATE_NEW_CONSOLE);
+    int result = RunCommand("CMD Window","cmd.exe", false, CREATE_NEW_CONSOLE);
 
-if (result == 0) std::cout << "New cmd window Opened!" << std::endl;
+if (result == 0 || result == 259) std::cout << "New cmd window Opened!" << std::endl;
 else std::cout << "cmd window encountered an issue." << std::endl;
 
 }
@@ -444,10 +444,10 @@ if (confirm) {
 
 std::cout << "Executing Boot Repair.." << std::endl;
 
-int result = RunCommand("bootrec /fixmbr", true);
-int result2 = RunCommand("bootrec /fixboot", true);
-int result3 = RunCommand("bootrec /scanos", true);
-int result4 = RunCommand("bootrec /rebuildbcd", true);
+int result = RunCommand("Boot Repair","bootrec /fixmbr", true);
+int result2 = RunCommand("Boot Repair","bootrec /fixboot", true);
+int result3 = RunCommand("Boot Repair","bootrec /scanos", true);
+int result4 = RunCommand("Boot Repair","bootrec /rebuildbcd", true);
 
 if (result == 0 && result2 == 0 && result3 == 0 && result4 == 0) std::cout << "Boot Repair completed!" << std::endl;
 else std::cout << "Boot Repair encountered an issue. Please reboot PC to verify normal boot before reopening program as admin." << std::endl;
@@ -460,7 +460,7 @@ void WindowsReport() {
 
 std::cout << "Generating Windows Report.." << std::endl;
 
-int result = RunCommand("perfmon /report", true);
+int result = RunCommand("Windows Report","perfmon /report", true);
 
 if (result == 0) std::cout << "Windows Report generated!" << std::endl;
 else std::cout << "Windows Report encountered an issue. Please reopen program as admin." << std::endl;
@@ -478,9 +478,9 @@ if (confirm) {
 
 std::cout << "Executing Power & Thermal Check.." << std::endl;
 
-int result = RunCommand("cmd.exe /c \"powercfg /energy\"", true);
-int result2 = RunCommand("powershell -Command Get-CimInstance Win32_Processor | Select-Object Name,LoadPercentage\"", true);
-int result3 = RunCommand("powershell -Command Get-CimInstance Win32_TemperatureProbe | Select-Object CurrentReading\"", true);
+int result = RunCommand("Power & Thermal Check","cmd.exe /c \"powercfg /energy\"", true);
+int result2 = RunCommand("Power & Thermal Check","powershell -Command Get-CimInstance Win32_Processor | Select-Object Name,LoadPercentage\"", true);
+int result3 = RunCommand("Power & Thermal Check","powershell -Command Get-CimInstance Win32_TemperatureProbe | Select-Object CurrentReading\"", true);
 
 if (result == 0 && result2 == 0 && result3 == 0) std::cout << "Power & Thermal Check completed!" << std::endl;
 else std::cout << "Power & Thermal Check encountered an issue. Please reopen program as admin." << std::endl;
