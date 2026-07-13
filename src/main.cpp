@@ -35,10 +35,8 @@ else {
 while (choice != "exit") {
 
 //Gives a warning if user didnt launch program with admin priveleges.
-if (! g_admin) {
-    std::cout << "<WARNING> Program is not being ran with administrative privelages." << std::endl;
-    std::cout << "To prevent some options not working; please reopen the program in admin mode." << std::endl;
-}
+if (! g_admin) std::cout << "<WARNING> Program is not being ran with administrative privelages." << std::endl;
+
 
 //Choice is set via UserInput function.
     choice = UserInput();

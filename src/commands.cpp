@@ -22,7 +22,7 @@ int size_needed = MultiByteToWideChar(CP_UTF8,
     0);
 if (size_needed == 0) return {};
 
-//Converts the string into this sized wstring.
+//Converts the string into the new wstring.
 std::wstring wstr(size_needed, 0);
 MultiByteToWideChar(CP_UTF8,
     0,

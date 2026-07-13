@@ -134,3 +134,39 @@ std::cout << "==================================================================
 
 
 }
+
+void HelpBanner_noadmin() {
+
+std::cout << "====================================================================================" << std::endl;
+std::cout << " " << std::endl;
+std::cout << " " << std::endl;
+std::cout << "REPAIR TOOLS" << std::endl;
+std::cout << " " << std::endl;
+
+
+std::cout << "[flushdns]: Flushes your DNS, potentially giving a more stable connection. " << std::endl;
+std::cout << "[renewip]: Removes and requests a new IP address.";
+std::cout << " Closing program/crashing may result in temporary network issues." << std::endl;
+
+std::cout << " " << std::endl;
+std::cout << "DIAGNOSTIC TOOLS" << std::endl;
+std::cout << " " << std::endl;
+
+std::cout << "[windowsreport]: Generates a windows report which can help diagnose system issues." << std::endl;
+std::cout << "[powerthermal_check]: checks your PC's power and thermal state with a stress test. Takes ~60 seconds and causes light load" << std::endl;
+std::cout << "[driver_status]: Checks and displays SSD/HDD information, such as health and status. " << std::endl;
+std::cout << "[sysinfo]: Displays OS and hardware information. " << std::endl;
+std::cout << "[eventvwr]: Runs event viewer to check system errors that may have caused BSODS/crashes. " << std::endl;
+std::cout << "[driverquery]: Scans all installed drivers for critical failures." << std::endl;
+std::cout << "[reliability_mon]: Shows any driver failures and windows update failures." << std::endl;
+std::cout << "[networkinfo]: Displays network information" << std::endl;
+std::cout << "[pingtest]: Tests your PC's internet connectivity. Press CTRL+C to stop the test" << std::endl;
+std::cout << "[newcmd]: Opens a new cmd terminal." << std::endl;
+std::cout << "[taskmngr]: Opens task manager." << std::endl;
+std::cout << "[devicemngr]: Opens device manager." << std::endl;
+std::cout << "[devicemanagerscan]: Scans all drives on device manager, telling which ones arent working properly. " << std::endl;
+std::cout << "[dxdiag]: Scans your dxdiag for gpu/driver issues. " << std::endl;
+std::cout << " " << std::endl;
+std::cout << "====================================================================================" << std::endl;
+
+}
