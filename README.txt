@@ -1,4 +1,4 @@
-RepairKit V 1.0.8
+RepairKit V 1.0.9
 
 # DESCRIPTION
 
@@ -33,6 +33,7 @@ This program was built as both a learning project and a resume piece for an upco
 - Boot Repair
 - Windows Report
 - Power & CPU Load Report.
+- Output Log Contents.
 
 
 # REQUIREMENTS TO BUILD:
@@ -46,7 +47,7 @@ run "repairkit_releasebuilder.bat" to compile source code into a usable .exe . A
 
 # PREBUILT RELEASE
 
-If you do not wish to compile the program yourself or don't have MinGW; there is a compiled .exe included in the repository as a downloadable asset.
+If you do not wish to compile the program yourself or don't have MinGW; there is a compiled .exe included in releases that is updated along with every source code update.
 
 # NOTES
 
