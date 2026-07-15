@@ -31,6 +31,7 @@ void Initcmds() {
     commandRegistry[21] = {"Device Manager Scan", "devicemanagerscan", false, DeviceManagerScan};
     commandRegistry[22] = {"Memory Diagnostic", "memdiag", true, Mem_Diagnostic};
     commandRegistry[23] = {"DXDIAG", "dxdiag", false, DXDIAG};
+    commandRegistry[24] = {"Open Log", "open_rklog", false, Open_rklog};
 
 
 }

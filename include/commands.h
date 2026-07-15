@@ -26,4 +26,5 @@ void New_CMD();
 void BootRepair();
 void WindowsReport();
 void Powerthermal_check();
+void Open_rklog();
 std::wstring ToWideString(const std::string& str);

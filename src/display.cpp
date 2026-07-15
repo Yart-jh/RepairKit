@@ -3,7 +3,7 @@
 
 void WelcomeBanner() {
 
-    std::cout << "Welcome to RepairTool!" << std::endl;
+    std::cout << "Welcome to RepairKit!" << std::endl;
     std::cout << " " << std::endl;
 
     std::cout << "--REPAIR--" << std::endl;
@@ -43,6 +43,7 @@ void WelcomeBanner() {
 
     std::cout << "[exit] EXIT" << std::endl;
     std::cout << "[info] INFO" << std::endl;
+    std::cout << "[open_rklog] OPEN LOG" << std::endl;
 
     std::cout << "======================================" << std::endl;
 
@@ -50,7 +51,7 @@ void WelcomeBanner() {
 
 void WelcomeBan_noadmin() {
 
-    std::cout << "Welcome to RepairTool!" << std::endl;
+    std::cout << "Welcome to RepairKit!" << std::endl;
     std::cout << "[Some options may be unavailable due to lack of admin privilages]" << std::endl;
     std::cout << "[Reopen the program as administrator to gain full access to the program]" << std::endl;
     std::cout << " " << std::endl;
@@ -84,6 +85,7 @@ void WelcomeBan_noadmin() {
 
     std::cout << "[exit] EXIT" << std::endl;
     std::cout << "[info] INFO" << std::endl;
+    std::cout << "[open_rklog] OPEN LOG" << std::endl;
 
     std::cout << "======================================" << std::endl;
 
@@ -93,9 +95,10 @@ void WelcomeBan_noadmin() {
 
 void HelpBanner() {
 
-std::cout << "====================================================================================" << std::endl;
+std::cout << "==========================================================================================================" << std::endl;
+std::cout << "INFORMATION" << std::endl;
 std::cout << " " << std::endl;
-std::cout << " " << std::endl;
+std::cout << "---------------------------------------------------------------------------" << std::endl;
 std::cout << "REPAIR TOOLS" << std::endl;
 std::cout << " " << std::endl;
 
@@ -109,13 +112,16 @@ std::cout << " Closing program/crashing may result in temporary network issues."
 std::cout << "[resetwinsock]: Resets your winsock, which fixes many connection issues. " << std::endl;
 std::cout << "[resetnetworkstack]: Resets network stack, which helps with unstable connections. " << std::endl;
 std::cout << "[bootrepair]: Repairs your boot configuration, which can fix boot issues." << std::endl;
-
+std::cout << "---------------------------------------------------------------------------" << std::endl;
 std::cout << " " << std::endl;
+std::cout << " " << std::endl;
+std::cout << "----------------------------------------------------------------------------------------------------" << std::endl;
 std::cout << "DIAGNOSTIC TOOLS" << std::endl;
 std::cout << " " << std::endl;
 
 std::cout << "[windowsreport]: Generates a windows report which can help diagnose system issues." << std::endl;
-std::cout << "[powerthermal_check]: checks your PC's power and thermal state with a stress test. Takes ~60 seconds and causes light load" << std::endl;
+std::cout << "[powerthermal_check]: checks your PC's power and thermal state with a stress test." << std::endl;
+std::cout <<  "Takes ~60 seconds and causes light load" << std::endl;
 std::cout << "[driver_status]: Checks and displays SSD/HDD information, such as health and status. " << std::endl;
 std::cout << "[sysinfo]: Displays OS and hardware information. " << std::endl;
 std::cout << "[eventvwr]: Runs event viewer to check system errors that may have caused BSODS/crashes. " << std::endl;
@@ -129,17 +135,20 @@ std::cout << "[devicemngr]: Opens device manager." << std::endl;
 std::cout << "[devicemanagerscan]: Scans all drives on device manager, telling which ones arent working properly. " << std::endl;
 std::cout << "[memdiag]: Schedules a memory diagnostic on your next reboot. " << std::endl;
 std::cout << "[dxdiag]: Scans your dxdiag for gpu/driver issues. " << std::endl;
+std::cout << "[open_rklog] Outputs the RepairKit log file contents." << std::endl;
+std::cout << "----------------------------------------------------------------------------------------------------" << std::endl;
 std::cout << " " << std::endl;
-std::cout << "====================================================================================" << std::endl;
+std::cout << "==========================================================================================================" << std::endl;
 
 
 }
 
 void HelpBanner_noadmin() {
 
-std::cout << "====================================================================================" << std::endl;
+std::cout << "==========================================================================================================" << std::endl;
+std::cout << "INFORMATION" << std::endl;
 std::cout << " " << std::endl;
-std::cout << " " << std::endl;
+std::cout << "---------------------------------------------------------------------------" << std::endl;
 std::cout << "REPAIR TOOLS" << std::endl;
 std::cout << " " << std::endl;
 
@@ -147,13 +156,17 @@ std::cout << " " << std::endl;
 std::cout << "[flushdns]: Flushes your DNS, potentially giving a more stable connection. " << std::endl;
 std::cout << "[renewip]: Removes and requests a new IP address.";
 std::cout << " Closing program/crashing may result in temporary network issues." << std::endl;
-
+std::cout << "---------------------------------------------------------------------------" << std::endl;
 std::cout << " " << std::endl;
+std::cout << " " << std::endl;
+std::cout << "----------------------------------------------------------------------------------------------------" << std::endl;
+
 std::cout << "DIAGNOSTIC TOOLS" << std::endl;
 std::cout << " " << std::endl;
 
 std::cout << "[windowsreport]: Generates a windows report which can help diagnose system issues." << std::endl;
-std::cout << "[powerthermal_check]: checks your PC's power and thermal state with a stress test. Takes ~60 seconds and causes light load" << std::endl;
+std::cout << "[powerthermal_check]: checks your PC's power and thermal state with a stress test." << std::endl;
+std::cout << "Takes ~60 seconds and causes light load" << std::endl;
 std::cout << "[driver_status]: Checks and displays SSD/HDD information, such as health and status. " << std::endl;
 std::cout << "[sysinfo]: Displays OS and hardware information. " << std::endl;
 std::cout << "[eventvwr]: Runs event viewer to check system errors that may have caused BSODS/crashes. " << std::endl;
@@ -166,7 +179,9 @@ std::cout << "[taskmngr]: Opens task manager." << std::endl;
 std::cout << "[devicemngr]: Opens device manager." << std::endl;
 std::cout << "[devicemanagerscan]: Scans all drives on device manager, telling which ones arent working properly. " << std::endl;
 std::cout << "[dxdiag]: Scans your dxdiag for gpu/driver issues. " << std::endl;
+std::cout << "[open_rklog] Outputs the RepairKit log file contents." << std::endl;
+std::cout << "----------------------------------------------------------------------------------------------------" << std::endl;
 std::cout << " " << std::endl;
-std::cout << "====================================================================================" << std::endl;
+std::cout << "==========================================================================================================" << std::endl;
 
 }

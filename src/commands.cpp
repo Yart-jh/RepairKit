@@ -43,7 +43,7 @@ int RunCommand(std::string choice, const std::string& cmd, bool wait = true, DWO
 
 
 if (!file) {
-std::cout << "<ERROR> Failed to open repairtooll_log.txt" << std::endl;
+std::cout << "<ERROR> Failed to open repairtool_log.txt" << std::endl;
 std::cout << "Process and other log info may be untracked." << std::endl;
 }
 
@@ -72,6 +72,7 @@ cmdLine.push_back(L'\0');
     &pi
 );
 
+GetTime();
 
 file << "====================" << std::endl;
 file << " " << std::endl;
@@ -488,5 +489,37 @@ else std::cout << "Power & Thermal Check encountered an issue. Please reopen pro
 
 }
 
+}
+
+void Open_rklog() {
+
+std::ifstream file("repairtool_log.txt");
+
+if (!file) {
+std::cout << "<ERROR> Couldnt find 'repairtool_log.txt'..." << std::endl;
+return;
+}
+
+std::string line;
+std::cout << "=====LOG CONTENTS=====" << std::endl;
+std::cout << "" << std::endl;
+
+while (std::getline(file, line)) {
+if (line == "=======REPAIRTOOL STARTED=======") {
+std::cout << "" << std::endl;
+}
+else {
+std::cout << line << std::endl;
+std::cout << " " << std::endl;
+}
+}
+
+if (file.bad()) {
+std::cout << "<ERROR> An I/O error occured while reading.." << std::endl;
+return;
+}
+
+std::cout << "======================" << std::endl;
+file.close();
 }
 //FINISH THESE FUNCTIONS!!!!!!!
